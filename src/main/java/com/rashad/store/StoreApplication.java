@@ -1,5 +1,6 @@
 package com.rashad.store;
 
+import com.rashad.store.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -8,16 +9,25 @@ import org.springframework.context.ApplicationContext;
 public class StoreApplication {
 
     public static void main(String[] args) {
-        ApplicationContext context =  SpringApplication.run(StoreApplication.class, args);
-//        var order = context.getBean(OrderService.class);
-//        order.placeOrder();
+//        ApplicationContext context =  SpringApplication.run(StoreApplication.class, args);
 
-//        var notificationService = context.getBean(NotificationManager.class);
-//        notificationService.snedNotification("test");
+        // first way
+        var user = new User();
+        user.setName("Mohamed");
+        user.setEmail("mohamed@gmail.com");
+        user.setPassword("12345");
 
-        var userService = context.getBean(UserService.class);
-        userService.registerUser(new User(1,"mohamed.a@wtm.llc", "12345678", "Mohamed"));
-//        userService.registerUser(new User(1,"mohamed.a@wtm.llc", "12345678", "Mohamed"));
+        // second using constructor
+        var user2 = new User(1,"Ahmed","ahmed@gmail.com","12345");
+
+        // third using builder pattern
+
+        var user3 = User.builder().name("Rashad").email("rashad@gmail.com").password("12345").build();
+
+        System.out.println("user1 : " + user.getName());
+        System.out.println("user2 : " + user2.getName());
+        System.out.println("user3 : " + user3.getName());
+
     }
 
 }
