@@ -22,15 +22,16 @@ public class Product {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
+    private String description;
+
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
     @Column(name = "category_id")
     private Byte categoryId;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
-
 }
