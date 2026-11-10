@@ -1,6 +1,7 @@
 package com.rashad.store;
 
 import com.rashad.store.entities.Address;
+import com.rashad.store.entities.Tag;
 import com.rashad.store.entities.User;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -30,6 +31,7 @@ public class StoreApplication {
                 .build();
 
         user3.addAddress(address);
+        user3.addTag("tag-1");
 
         System.out.println(user3);
 

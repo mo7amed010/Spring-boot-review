@@ -3,9 +3,15 @@ package com.rashad.store.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.Set;
 
+@ToString
+@NoArgsConstructor
 @Setter
 @Getter
 @Entity
@@ -19,4 +25,12 @@ public class Tag {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "tsgs")
+    private Set<User> users = new HashSet<>();
+
+    public Tag(String name) {
+        this.name = name;
+    }
 }
