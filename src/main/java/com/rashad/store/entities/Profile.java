@@ -1,13 +1,13 @@
 package com.rashad.store.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -18,7 +18,7 @@ public class Profile {
     private Long id;
 
     @Column(name = "bio")
-    private String street;
+    private String bio;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -28,5 +28,10 @@ public class Profile {
 
     @Column(name = "loyalty_points")
     private String loyaltyPoints;
+
+    @ToString.Exclude
+    @OneToOne
+    @MapsId
+    private User user;
 
 }

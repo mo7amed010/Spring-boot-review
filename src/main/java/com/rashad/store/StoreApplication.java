@@ -1,6 +1,7 @@
 package com.rashad.store;
 
 import com.rashad.store.entities.Address;
+import com.rashad.store.entities.Profile;
 import com.rashad.store.entities.Tag;
 import com.rashad.store.entities.User;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,8 +31,15 @@ public class StoreApplication {
                 .zip("21343")
                 .build();
 
+        var profile = Profile.builder()
+                        .bio("test bio")
+                        .build();
+
         user3.addAddress(address);
         user3.addTag("tag-1");
+        user3.addProfile(profile);
+
+
 
         System.out.println(user3);
 
