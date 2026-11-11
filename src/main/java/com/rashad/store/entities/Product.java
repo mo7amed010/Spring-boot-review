@@ -28,9 +28,6 @@ public class Product {
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column(name = "category_id")
-    private Byte categoryId;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

@@ -32,6 +32,7 @@ public class Profile {
     @ToString.Exclude
     @OneToOne
     @MapsId
+    @JoinColumn(name = "id")
     private User user;
 
 }
