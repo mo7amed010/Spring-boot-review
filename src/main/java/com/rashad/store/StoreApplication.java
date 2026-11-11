@@ -1,48 +1,31 @@
 package com.rashad.store;
 
-import com.rashad.store.entities.Address;
-import com.rashad.store.entities.Profile;
-import com.rashad.store.entities.Tag;
 import com.rashad.store.entities.User;
+import com.rashad.store.repositories.UserRepository;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class StoreApplication {
 
     public static void main(String[] args) {
-//        ApplicationContext context =  SpringApplication.run(StoreApplication.class, args);
-
+        ApplicationContext context =  SpringApplication.run(StoreApplication.class, args);
+        var repository = context.getBean(UserRepository.class);
         // first way
-        var user = new User();
-        user.setName("Mohamed");
-        user.setEmail("mohamed@gmail.com");
-        user.setPassword("12345");
+//        var user = new User();
+//        user.setName("Ahmed");
+//        user.setEmail("ahmed@gmail.com");
+//        user.setPassword("12345");
 
-        // second using constructor
-//        var user2 = new User(1,"Ahmed","ahmed@gmail.com","12345");
+        // select one
+        var user = repository.findById(1L).orElseThrow();
+        System.out.println(user.getName());
 
-        // third using builder pattern
+        repository.deleteById(1L);
 
-        var user3 = User.builder().name("Rashad").email("rashad@gmail.com").password("12345").build();
-        var address = Address.builder()
-                .city("Cairo")
-                .state("Cairo")
-                .street("salah salem")
-                .zip("21343")
-                .build();
-
-        var profile = Profile.builder()
-                        .bio("test bio")
-                        .build();
-
-        user3.addAddress(address);
-        user3.addTag("tag-1");
-        user3.addProfile(profile);
-
-
-
-        System.out.println(user3);
-
+        // select all
+        repository.findAll().forEach((User u) -> System.out.println(u.getName()));
     }
 
 }
