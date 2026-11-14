@@ -81,5 +81,7 @@ public class User {
     }
 
 
-
+    public void addWishlistProduct(Product product) {
+        wishlist.add(product);
+    }
 }

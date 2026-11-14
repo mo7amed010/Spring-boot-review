@@ -1,8 +1,10 @@
 package com.rashad.store.services;
 
 import com.rashad.store.entities.Address;
+import com.rashad.store.entities.Product;
 import com.rashad.store.entities.User;
 import com.rashad.store.repositories.AddressRepository;
+import com.rashad.store.repositories.ProductRepository;
 import com.rashad.store.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -12,11 +14,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final AddressService addressService;
     private final AddressRepository addressRepository;
+    private final ProductRepository productRepository;
 
-    public UserService(UserRepository userRepository, AddressService addressService, AddressRepository addressRepository) {
+    public UserService(UserRepository userRepository, AddressService addressService, AddressRepository addressRepository, ProductRepository productRepository) {
         this.userRepository = userRepository;
         this.addressService = addressService;
         this.addressRepository = addressRepository;
+        this.productRepository = productRepository;
     }
 
     public void presistRelated(){
@@ -51,4 +55,16 @@ public class UserService {
         user.removeAddress(adddress);
         userRepository.save(user);
     }
+
+    @Transactional
+    public void addProductsToWishlist(){
+        var user = userRepository.findById(5L).orElseThrow();
+        var products = productRepository.findAll();
+
+        products.forEach(user::addWishlistProduct);
+
+        userRepository.save(user);
+    }
+
+
 }
