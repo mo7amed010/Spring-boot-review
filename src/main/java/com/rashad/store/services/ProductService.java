@@ -6,8 +6,7 @@ import com.rashad.store.entities.Product;
 import com.rashad.store.repositories.AddressRepository1;
 import com.rashad.store.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -82,5 +81,24 @@ public class ProductService {
         var products = productRepository.findAll(example);
         products.forEach(System.out::println);
 
+    }
+
+    public void getSortedProducts(){
+        var sort = Sort.by("name").descending().and(
+                Sort.by("price")
+        );
+
+        var products = productRepository.findAll(sort);
+        products.forEach(System.out::println);
+    }
+
+    public void fetchPaginatedProducts(int pageNumber, int size){
+        PageRequest pageRequest = PageRequest.of(pageNumber,size);
+        Page<Product> page = productRepository.findAll(pageRequest);
+
+        page.getContent().forEach(System.out::println);
+
+        System.out.println("total pages: " + page.getTotalPages());
+        System.out.println("total products: " + page.getTotalElements());
     }
 }

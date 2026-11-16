@@ -33,7 +33,9 @@ public class StoreApplication {
 
 //        userService.getAllProfiles();
 
-        productService.findUsingExample();
+//        productService.findUsingExample();
+//        productService.getSortedProducts();
+        productService.fetchPaginatedProducts(0, 10);
     }
 
 
