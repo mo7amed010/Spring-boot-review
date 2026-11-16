@@ -26,7 +26,12 @@ public class StoreApplication {
 //        productService.createProduct();
 //        userService.addProductsToWishlist();
 
-        productService.deleteProduct();
+//        productService.deleteProduct();
+
+//        productService.testDerivedQueries();
+//        productService.findAll();
+
+        userService.getAllProfiles();
     }
 
 
