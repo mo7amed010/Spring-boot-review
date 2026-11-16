@@ -6,6 +6,8 @@ import com.rashad.store.entities.Product;
 import com.rashad.store.repositories.AddressRepository1;
 import com.rashad.store.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -68,5 +70,17 @@ public class ProductService {
     public void findAll(){
         var products = productRepository.findProducts(BigDecimal.valueOf(5), BigDecimal.valueOf(26));
         products.forEach(System.out::println);
+    }
+
+    public void findUsingExample(){
+        var product = new Product();
+        product.setName("Product");
+
+        var mathcer = ExampleMatcher.matching()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        var example  = Example.of(product, mathcer);
+        var products = productRepository.findAll(example);
+        products.forEach(System.out::println);
+
     }
 }

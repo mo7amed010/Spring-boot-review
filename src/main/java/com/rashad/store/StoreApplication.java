@@ -31,7 +31,9 @@ public class StoreApplication {
 //        productService.testDerivedQueries();
 //        productService.findAll();
 
-        userService.getAllProfiles();
+//        userService.getAllProfiles();
+
+        productService.findUsingExample();
     }
 
 
