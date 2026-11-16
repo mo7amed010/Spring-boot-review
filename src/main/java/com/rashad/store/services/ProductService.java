@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -56,5 +57,16 @@ public class ProductService {
     //Q4
     public void deleteProduct(){
         productRepository.deleteById(4L);
+    }
+
+    public void testDerivedQueries(){
+        var product = productRepository.findByNameLikeIgnoreCase("Product_2").getFirst();
+        System.out.println(product);
+    }
+
+    @Transactional
+    public void findAll(){
+        var products = productRepository.findProducts(BigDecimal.valueOf(5), BigDecimal.valueOf(26));
+        products.forEach(System.out::println);
     }
 }
